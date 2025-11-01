@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h3>保存到知识库</h3>
+    
+    <div id="page-info">
+      <p id="title">标题加载中...</p>
+      <p id="url">URL加载中...</p>
+    </div>
+    
+    <div class="input-group">
+      <label for="notes">📝 个人笔记</label>
+      <textarea id="notes" placeholder="添加你的想法和笔记..."></textarea>
+    </div>
+    
+    <div class="input-group">
+      <label for="tags-input">🏷️ 标签</label>
+      <input type="text" id="tags-input" placeholder="用逗号分隔，如：学习, 技术, AI">
+    </div>
+    
+    <button id="save-btn">💾 保存到知识库</button>
+    
+    <div id="status"></div>
+    
+    <div class="shortcut-hint">
+      快捷键：<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

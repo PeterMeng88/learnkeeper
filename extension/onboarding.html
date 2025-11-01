@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>欢迎使用 LearnKeeper</title>
+  <style>
+    body {
+      width: 600px;
+      margin: 50px auto;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      color: #667eea;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .step {
+      background: #f5f7fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #667eea;
+    }
+    .step h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .code {
+      background: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      margin: 10px 0;
+    }
+    .button-group {
+      text-align: center;
+      margin-top: 40px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 0 10px;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    .secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+    .secondary:hover {
+      background: #d0d0d0;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎉 欢迎使用 LearnKeeper！</h1>
+    <p>你的AI学习助手已准备就绪</p>
+  </div>
+  
+  <div class="step">
+    <h3>📁 文件保存位置</h3>
+    <p>保存的笔记会自动存放在：</p>
+    <div class="code">下载/LearnKeeper/</div>
+    <p>（Windows: C:\Users\你的用户名\Downloads\LearnKeeper\）</p>
+  </div>
+  
+  <div class="step">
+    <h3>💡 推荐：与 Obsidian 集成</h3>
+    <p><strong>方法1：设置 Obsidian 监听下载文件夹</strong></p>
+    <ol>
+      <li>打开 Obsidian 设置</li>
+      <li>文件 → 默认新建位置</li>
+      <li>选择：下载/LearnKeeper</li>
+    </ol>
+    
+    <p><strong>方法2：手动移动文件</strong></p>
+    <p>定期将下载文件夹中的文件移动到 Obsidian vault</p>
+  </div>
+  
+  <div class="step">
+    <h3>🤖 启用 AI 功能（可选）</h3>
+    <p>如需AI自动提取摘要和知识点：</p>
+    <ol>
+      <li>下载后端程序（见 GitHub）</li>
+      <li>双击运行 kb_backend.py</li>
+      <li>自动获得AI增强功能</li>
+    </ol>
+    <p>不启动后端也能正常保存，只是没有AI摘要</p>
+  </div>
+  
+  <div class="button-group">
+    <button id="startBtn">开始使用 →</button>
+    <button class="secondary" id="tutorialBtn">查看完整教程</button>
+  </div>
+  
+  <script src="onboarding.js"></script>
+</body>
+</html>
