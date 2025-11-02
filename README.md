@@ -55,38 +55,32 @@ Go to [Releases](https://github.com/PeterMeng88/learnkeeper/releases) and downlo
 - Check "Add to PATH" during installation
 
 **b. Install dependencies**
-bash  抨击
-cd backend  CD 后端
+``` 
+cd backend 
 pip install -r requirements.txt
-code  法典
-复制
-折叠
+```
 
 **c. Get API Key**
-1. Sign up: https://cloud.siliconflow.cn
-2. Get your API key (free credits available)
+1. Sign up: https://cloud.siliconflow.cn  
+2. Get your API key (free credits available)  
 
-**d. Configure**
-1. Rename `env-example.txt` to `.env`
-2. Open `.env` and add your API key:
+**d. Configure**  
+1. Rename `env-example.txt` to `.env`  
+2. Open `.env` and add your API key:  
 
 SILICONFLOWAPIKEY=sk-your-key-here
 SILICONFLOWAPI 密钥=sk-your-key-here
-code  法典
-复制
 
 **e. Start backend**
-bash  抨击
-python kb_backend.py  蟒蛇 kb_backend.py
-code  法典
-复制
-展开
+```
+python kb_backend.py  
+```
 
 You should see: `✅ AI功能已启用`
 
 **f. Keep it running**
 - Don't close the terminal
-- Now saving pages will include AI summaries
+- Now saving pages will include AI summaries  
 
 ---
 
