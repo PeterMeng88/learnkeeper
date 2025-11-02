@@ -1,36 +1,9 @@
 let currentTab = null;
 let pageContent = "";
 
-// 保存历史记录
-async function saveToHistory(data) {
-  const history = await chrome.storage.local.get('saveHistory') || { saveHistory: [] };
-  const historyList = history.saveHistory || [];
-  
-  historyList.unshift({
-    title: data.title,
-    url: data.url,
-    timestamp: new Date().toISOString(),
-    tags: data.tags
-  });
-  
-  // 只保留最近50条
-  if (historyList.length > 50) {
-    historyList.pop();
-  }
-  
-  await chrome.storage.local.set({ saveHistory: historyList });
-}
-
 // 页面加载时获取标签页信息
 document.addEventListener('DOMContentLoaded', async () => {
   console.log("Popup loaded");
-  
-  // 加载最近使用的标签
-  const recent = await chrome.storage.local.get('recentTags');
-  if (recent.recentTags && recent.recentTags.length > 0) {
-    document.getElementById('tags-input').placeholder = 
-      `常用标签：${recent.recentTags.slice(0, 3).join(', ')}`;
-  }
   
   try {
     const tabs = await chrome.tabs.query({active: true, currentWindow: true});
@@ -60,14 +33,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response && response.content) {
           pageContent = response.content;
           console.log("获取到内容，长度:", pageContent.length);
-          
-          // 如果有metadata，显示来源类型
-          if (response.metadata && response.metadata.source) {
-            const sourceTag = document.createElement('span');
-            sourceTag.style.cssText = 'background:#667eea;color:white;padding:2px 8px;border-radius:4px;font-size:11px;margin-left:8px;';
-            sourceTag.textContent = response.metadata.source;
-            document.getElementById('title').appendChild(sourceTag);
-          }
         } else {
           console.log("没有收到内容响应");
           pageContent = "无法提取页面内容";
@@ -102,65 +67,110 @@ document.getElementById('save-btn').addEventListener('click', async () => {
   statusDiv.textContent = '🔄 处理中...';
   statusDiv.style.color = '#666';
   
-  console.log("准备发送数据:", { title, url, notes, tags });
-  
   try {
-    const response = await fetch('http://localhost:8000/api/save-content', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: title,
-        url: url,
-        content: pageContent || "无内容",
-        notes: notes,
-        tags: tags,
-        vault_path: "",  // 用户需自行配置
-        metadata: {}
-      })
+    // 尝试调用后端获取AI摘要
+    let aiSummary = '';
+    let keyPoints = [];
+    let suggestedTags = [];
+    
+    try {
+      const response = await fetch('http://localhost:8000/api/save-content', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          title: title,
+          url: url,
+          content: pageContent || "无内容",
+          notes: notes,
+          tags: tags,
+          vault_path: "",
+          metadata: {}
+        }),
+        signal: AbortSignal.timeout(5000)
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success && result.ai_enhanced) {
+          aiSummary = result.summary || '';
+          keyPoints = result.key_points || [];
+          suggestedTags = result.suggested_tags || [];
+        }
+      }
+    } catch (error) {
+      console.log("后端不可用，使用本地保存:", error);
+    }
+    
+    // 合并标签
+    const allTags = [...new Set([...tags, ...suggestedTags])];
+    
+    // 生成Markdown内容
+    const timestamp = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+    const markdown = `---
+title: ${title}
+url: ${url}
+tags: ${allTags.join(', ')}
+created: ${new Date().toLocaleString('zh-CN')}
+---
+
+# ${title}
+
+## 🔗 原文链接
+${url}
+
+${aiSummary ? `## 📝 AI摘要
+${aiSummary}
+
+` : ''}${keyPoints.length > 0 ? `## 💡 关键知识点
+${keyPoints.map((p, i) => `${i + 1}. ${p}`).join('\n')}
+
+` : ''}${notes ? `## ✍️ 个人笔记
+${notes}
+
+` : ''}## 📄 原文内容
+
+${pageContent ? pageContent.substring(0, 5000) : '无法提取内容'}${pageContent && pageContent.length > 5000 ? '...' : ''}
+
+---
+> 💾 由 LearnKeeper 保存  
+> ⏰ ${new Date().toLocaleString('zh-CN')}
+`;
+    
+    // 生成文件名
+    const safeTitle = title.replace(/[\\/*?:"<>|]/g, '').substring(0, 50);
+    const filename = `LearnKeeper/${safeTitle}_${timestamp}.md`;
+    
+    // 下载文件
+    const blob = new Blob([markdown], {type: 'text/markdown; charset=utf-8'});
+    const downloadUrl = URL.createObjectURL(blob);
+    
+    chrome.downloads.download({
+      url: downloadUrl,
+      filename: filename,
+      saveAs: false
+    }, (downloadId) => {
+      if (chrome.runtime.lastError) {
+        statusDiv.textContent = '❌ 保存失败: ' + chrome.runtime.lastError.message;
+        statusDiv.style.color = 'red';
+        saveBtn.disabled = false;
+      } else {
+        statusDiv.textContent = '✅ 已保存到下载文件夹/LearnKeeper';
+        statusDiv.style.color = 'green';
+        
+        if (suggestedTags.length > 0) {
+          statusDiv.textContent += ` | AI: ${suggestedTags.slice(0, 3).join(', ')}`;
+        }
+        
+        setTimeout(() => window.close(), 2000);
+      }
+      
+      URL.revokeObjectURL(downloadUrl);
     });
     
-    console.log("响应状态:", response.status);
-    const result = await response.json();
-    console.log("响应数据:", result);
-    
-    if (result.success) {
-      // 保存到历史
-      await saveToHistory({ title, url, tags });
-      
-      // 更新常用标签
-      if (tags.length > 0) {
-        const recent = await chrome.storage.local.get('recentTags');
-        let recentTags = recent.recentTags || [];
-        tags.forEach(tag => {
-          recentTags = recentTags.filter(t => t !== tag);
-          recentTags.unshift(tag);
-        });
-        await chrome.storage.local.set({ recentTags: recentTags.slice(0, 10) });
-      }
-      
-      statusDiv.textContent = '✅ 已保存到知识库';
-      statusDiv.style.color = 'green';
-      statusDiv.style.background = '#e8f5e9';
-      
-      // 显示AI建议的标签
-      if (result.suggested_tags && result.suggested_tags.length > 0) {
-        statusDiv.textContent += ` | AI建议标签: ${result.suggested_tags.join(', ')}`;
-      }
-      
-      setTimeout(() => window.close(), 2000);
-    } else {
-      statusDiv.textContent = '❌ ' + (result.message || '保存失败');
-      statusDiv.style.color = 'red';
-      statusDiv.style.background = '#ffebee';
-      saveBtn.disabled = false;
-    }
   } catch (error) {
     console.error("保存失败:", error);
-    statusDiv.textContent = '❌ 连接失败: ' + error.message;
+    statusDiv.textContent = '❌ 保存失败: ' + error.message;
     statusDiv.style.color = 'red';
-    statusDiv.style.background = '#ffebee';
     saveBtn.disabled = false;
   }
 });
