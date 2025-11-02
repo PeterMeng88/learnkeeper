@@ -68,8 +68,7 @@ pip install -r requirements.txt
 1. Rename `env-example.txt` to `.env`  
 2. Open `.env` and add your API key:  
 
-SILICONFLOWAPIKEY=sk-your-key-here
-SILICONFLOWAPI 密钥=sk-your-key-here
+SILICONFLOWAPIKEY=sk-your-key-here  
 
 **e. Start backend**
 ```
