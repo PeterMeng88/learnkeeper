@@ -142,7 +142,7 @@ Contributions welcome!
 4. Push to the branch
 5. Open a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Please open an issue first to discuss what you would like to change  
 
 ---
 
