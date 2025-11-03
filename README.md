@@ -24,9 +24,6 @@ Save, organize, and chat with your knowledge. Local-first, AI-enhanced, open sou
 
 *One-click save with AI enhancement*
 
----
-
-
 
 ---
 
