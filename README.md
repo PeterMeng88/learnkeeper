@@ -17,6 +17,16 @@ Save, organize, and chat with your knowledge. Local-first, AI-enhanced, open sou
 - 💬 **Knowledge Chat** - Talk with your knowledge base using RAG
 - 🔗 **Easy Integration** - Works with Obsidian & AnythingLLM
 - 💰 **Low Cost** - ~$0.0001 per AI call
+- 
+### 📺 Demo
+
+![Demo](docs/demo.gif)
+
+*One-click save with AI enhancement*
+
+---
+
+
 
 ---
 
