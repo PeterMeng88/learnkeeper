@@ -143,9 +143,12 @@ python kb_backend.py
 ```
 
 **成功标志：**
-✅ AI功能已启用（硅基流动 - Qwen2.5-7B）
-🚀 知识库后端服务启动中...
-INFO: Uvicorn running on http://0.0.0.0:800
+✅ AI功能已启用（硅基流动 - Qwen2.5-7B
+
+知识库后端服务启动中...
+
+NFO: Uvicorn running on http://0.0.0.0:800
+
 
 ---
 
@@ -218,17 +221,29 @@ INFO: Uvicorn running on http://0.0.0.0:800
 
 **使用Python脚本：**
 python
-```auto_sync.py```
+```
+uto_sync.py
+```
 
 import shutil
+
+
 import os
+
+
 from pathlib import Path
 
 source = Path.home() / "Downloads/LearnKeeper"
+
+
 target = Path("D:/你的Obsidian仓库/notes")
 
 for file in source.glob("*.md"):
+
+
 shutil.copy(file, target)
+
+
 print(f"已同步: {file.name}")
 
 
@@ -248,9 +263,17 @@ print(f"已同步: {file.name}")
 
 ### 推荐结构：
 LearnKeeper/
+
+
 ├── 00-收件箱/ ← 新保存的内容
+
+
 ├── 01-处理中/ ← 正在学习的
+
+
 ├── 02-已完成/ ← 已掌握的
+
+
 └── 03-归档/ ← 参考资料
 
 ---
@@ -277,6 +300,7 @@ A: 检查Python版本（需要3.8+）和依赖安装
 A: 在下载文件夹中找 LearnKeeper 子文件夹
 
 下一步：[查看FAQ](FAQ.md) 或 [回到主页](../README.md)
+
 
 
 
