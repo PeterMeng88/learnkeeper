@@ -6,6 +6,6 @@ document.getElementById('startBtn').addEventListener('click', () => {
 
 document.getElementById('tutorialBtn').addEventListener('click', () => {
   chrome.tabs.create({
-    url: 'https://github.com/PeterMeng88/learnkeeper#usage'
+    url: 'https://github.com/PeterMeng88/learnkeeper/blob/main/docs/INSTALLATION.md'
   });
 });
