@@ -214,7 +214,7 @@ INFO: Uvicorn running on http://0.0.0.0:8000
 
 ### 方法4：自动同步（高级）
 
-**使用FreeFileSync：**
+**使用FreeFileSync：**  
 1. 下载：https://freefilesync.org/
 2. 源文件夹：`Downloads/LearnKeeper`
 3. 目标文件夹：你的Obsidian vault
@@ -227,7 +227,7 @@ python
 
 auto_sync.py    
 
-```   
+``` 
 
 import shutil  导入 shutil  
 import os  
@@ -291,5 +291,6 @@ A: 检查Python版本（需要3.8+）和依赖安装
 A: 在下载文件夹中找 LearnKeeper 子文件夹
 
 下一步：[查看FAQ](FAQ.md) 或 [回到主页](../README.md)
+
 
 
