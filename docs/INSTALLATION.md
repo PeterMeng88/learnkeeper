@@ -148,7 +148,6 @@ python kb_backend.py
 🚀 知识库后端服务启动中...
 INFO: Uvicorn running on http://0.0.0.0:8000
 信息：Uvicorn 在 http://0.0.0.0:8000 上运行
-
 ⚠️ 保持这个窗口运行，不要关闭
 
 ---
@@ -229,19 +228,6 @@ auto_sync.py   
 
 ``` 
 
-import shutil 
-import os 
-from pathlib import Path 
-
-source = Path.home() / "Downloads/LearnKeeper"
-target = Path("D:/你的Obsidian仓库/notes")
-  
-
-for file in source.glob("*.md"):
-shutil.copy(file, target)   
-print(f"已同步: {file.name}")  
-
-
 ---
 
 ## 🎓 Obsidian使用技巧
@@ -257,13 +243,12 @@ print(f"已同步: {file.name}") 
 - **Various Complements**：自动补全标签
 
 ### 推荐结构：
+
 LearnKeeper/  学习守护者/
 ├── 00-收件箱/ ← 新保存的内容
 ├── 01-处理中/ ← 正在学习的
 ├── 02-已完成/ ← 已掌握的
 └── 03-归档/ ← 参考资料
-
-
 ---
 
 ## ✅ 完成！
@@ -288,6 +273,7 @@ A: 检查Python版本（需要3.8+）和依赖安装
 A: 在下载文件夹中找 LearnKeeper 子文件夹
 
 下一步：[查看FAQ](FAQ.md) 或 [回到主页](../README.md)
+
 
 
 
