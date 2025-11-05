@@ -181,7 +181,7 @@ INFO: Uvicorn running on http://0.0.0.0:8000
 ✅ 无需手动移动  
 ✅ 实时同步
 
-![Obsidian设置](screenshots/obsidian-settings.png)
+![Obsidian设置](screenshots/obsidian-settings.png)  
 
 ---
 
@@ -229,20 +229,17 @@ auto_sync.py   
 
 ``` 
 
-import shutil  导入 shutil  
-import os  
-
-from pathlib import Path  from pathlib   
+import shutil 
+import os 
+from pathlib import Path 
 
 source = Path.home() / "Downloads/LearnKeeper"
-target = Path("D:/你的Obsidian仓库/notes")  
-target = Path（“D：/你的 Obsidian 仓库/notes”）
+target = Path("D:/你的Obsidian仓库/notes")
+  
 
 for file in source.glob("*.md"):
-hutil.copy(file, target)
-shutil.copy（文件，目标）
-print(f"已同步: {file.name}")
-print（f“已同步： {file.name}”）
+shutil.copy(file, target)   
+print(f"已同步: {file.name}")  
 
 
 ---
@@ -291,6 +288,7 @@ A: 检查Python版本（需要3.8+）和依赖安装
 A: 在下载文件夹中找 LearnKeeper 子文件夹
 
 下一步：[查看FAQ](FAQ.md) 或 [回到主页](../README.md)
+
 
 
 
