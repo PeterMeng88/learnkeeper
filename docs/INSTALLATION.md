@@ -143,7 +143,9 @@ python kb_backend.py
 ```
 
 **成功标志：**
-✅ AI功能已启用（硅基流动 - Qwen2.5-7B
+
+
+✅ AI功能已启用（硅基流动 - Qwen2.5-7）
 
 知识库后端服务启动中...
 
@@ -222,7 +224,7 @@ NFO: Uvicorn running on http://0.0.0.0:800
 **使用Python脚本：**
 python
 ```
-uto_sync.py
+auto_sync.py
 ```
 
 import shutil
@@ -300,6 +302,7 @@ A: 检查Python版本（需要3.8+）和依赖安装
 A: 在下载文件夹中找 LearnKeeper 子文件夹
 
 下一步：[查看FAQ](FAQ.md) 或 [回到主页](../README.md)
+
 
 
 
