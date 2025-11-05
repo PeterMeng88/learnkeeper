@@ -1,0 +1,178 @@
+# 安装教程
+
+## 📦 浏览器插件安装
+
+### 第一步：下载插件
+
+1. 访问 [Releases页面](https://github.com/PeterMeng88/learnkeeper/releases)
+2. 找到最新版本
+3. 下载 `learnkeeper-extension-vX.X.X.zip`
+
+![下载](screenshots/download.png)
+
+---
+
+### 第二步：解压文件
+
+1. 右键下载的zip文件
+2. 选择"全部解压缩"
+3. 选择解压位置（建议：桌面）
+4. 点击"解压"
+
+![解压](screenshots/extract.png)
+
+---
+
+### 第三步：打开Chrome扩展页面
+
+1. 打开Chrome浏览器
+2. 地址栏输入：`chrome://extensions/`
+3. 按回车
+
+![扩展页面](screenshots/extensions.png)
+
+---
+
+### 第四步：启用开发者模式
+
+1. 找到右上角的"开发者模式"开关
+2. 点击开启（变成蓝色）
+
+![开发者模式](screenshots/dev-mode.png)
+
+---
+
+### 第五步：加载插件
+
+1. 点击左上角"加载已解压的扩展程序"
+2. 选择刚才解压的文件夹
+3. 点击"选择文件夹"
+
+![加载](screenshots/load.png)
+
+---
+
+### 第六步：确认安装成功
+
+✅ 插件列表中出现 LearnKeeper  
+✅ 浏览器右上角出现插件图标  
+✅ 首次安装会自动打开引导页
+
+![成功](screenshots/installed.png)
+
+---
+
+## 🤖 后端安装（可选）
+
+**注意：不安装后端也能正常保存网页，只是没有AI功能**
+
+### 第一步：安装Python
+
+**Windows：**
+1. 访问 https://www.python.org/downloads/
+2. 下载 Python 3.8+
+3. 运行安装包
+4. ⚠️ 勾选"Add Python to PATH"
+5. 点击"Install Now"
+
+**Mac：**
+```
+brew install python3
+```
+
+**验证安装：**
+```
+python --version
+```
+
+应显示：Python 3.8.x 或更高
+
+---
+
+### 第二步：下载后端代码
+
+**方法1：下载zip**
+1. 访问 https://github.com/PeterMeng88/learnkeeper
+2. 点击绿色"Code"按钮
+3. 选择"Download ZIP"
+4. 解压到任意位置
+
+**方法2：使用git**
+```
+git clone https://github.com/PeterMeng88/learnkeeper.git
+```
+
+---
+
+### 第三步：安装依赖
+
+```
+cd learnkeeper/backend
+pip install -r requirements.txt
+```
+
+等待安装完成（约1-2分钟）
+
+---
+
+### 第四步：获取API密钥
+
+1. 访问 https://cloud.siliconflow.cn
+2. 注册/登录账号
+3. 进入"API密钥"页面
+4. 点击"创建新密钥"
+5. 复制密钥（sk-开头）
+
+💰 新用户有免费额度
+
+---
+
+### 第五步：配置密钥
+
+1. 找到 `backend` 文件夹中的 `env-example.txt`
+2. 重命名为 `.env`
+3. 用记事本打开
+4. 修改第一行：SILICONFLOWAPIKEY=sk-粘贴你的密钥
+5. 保存
+
+---
+
+### 第六步：启动后端
+```
+python kb_backend.py
+```
+
+**成功标志：**
+
+✅ AI功能已启用（硅基流动 - Qwen2.5-7B）
+🚀 知识库后端服务启动中...
+INFO: Uvicorn running on http://0.0.0.0:8000
+信息：Uvicorn 在 http://0.0.0.0:8000 上运行
+
+⚠️ 保持这个窗口运行，不要关闭
+
+---
+
+## ✅ 完成！
+
+现在可以：
+1. 访问任意网页
+2. 点击LearnKeeper图标
+3. 保存内容（有后端会自动生成AI摘要）
+4. 文件在：下载/LearnKeeper/
+
+---
+
+## 🆘 常见问题
+
+**Q: Chrome说"无法加载扩展程序"**  
+A: 确认选择的是解压后的文件夹，不是zip文件
+
+**Q: 后端启动失败**  
+A: 检查Python版本（需要3.8+）和依赖安装
+
+**Q: 找不到保存的文件**  
+A: 在下载文件夹中找 LearnKeeper 子文件夹
+
+更多问题见 [FAQ](FAQ.md)
+
